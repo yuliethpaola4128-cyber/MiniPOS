@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using MiniPOS.Database;
 using MySql.Data.MySqlClient;
@@ -12,10 +13,10 @@ namespace MiniPOS.Forms
             InitializeComponent();
         }
 
-        private void btnEntrar_Click(object sender, EventArgs e)
+        private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
             string usuario = txtUsuario.Text;
-            string password = txtPassword.Text;
+            string password = txtContrasena.Text;
 
             if (usuario == "" || password == "")
             {
@@ -27,7 +28,9 @@ namespace MiniPOS.Forms
             {
                 MySqlConnection conn = ConexionDB.ObtenerConexion();
 
-                string sql = "SELECT nombre_completo FROM usuarios WHERE nombre_usuario=@u AND contrasena=@p";
+                string sql = "SELECT nombre_completo FROM usuarios " +
+                             "WHERE nombre_usuario=@u AND contrasena=@p AND activo=1";
+
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@u", usuario);
                 cmd.Parameters.AddWithValue("@p", password);
@@ -37,15 +40,15 @@ namespace MiniPOS.Forms
                 if (resultado != null)
                 {
                     string nombre = resultado.ToString();
-                    frmPrincipal ventanaPrincipal = new frmPrincipal(nombre);
+                    frmPrincipal ventana = new frmPrincipal(nombre);
                     Hide();
-                    ventanaPrincipal.ShowDialog();
+                    ventana.ShowDialog();
                     Close();
                 }
                 else
                 {
                     lblMensaje.Text = "Usuario o contrasena incorrectos";
-                    txtPassword.Clear();
+                    txtContrasena.Clear();
                 }
 
                 conn.Close();
@@ -54,6 +57,12 @@ namespace MiniPOS.Forms
             {
                 lblMensaje.Text = "Error: " + ex.Message;
             }
+        }
+
+        private void txtContrasena_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btnIniciarSesion_Click(sender, e);
         }
     }
 }

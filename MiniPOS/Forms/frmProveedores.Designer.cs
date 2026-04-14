@@ -43,150 +43,282 @@ namespace MiniPOS.Forms
         private void InitializeComponent()
         {
             grpDatos = new GroupBox();
-            grpLista = new GroupBox();
             lblId = new Label();
+            txtId = new TextBox();
             lblEmpresa = new Label();
+            txtEmpresa = new TextBox();
             lblContacto = new Label();
+            txtContacto = new TextBox();
             lblTelefono = new Label();
+            txtTelefono = new TextBox();
             lblTelStatus = new Label();
             lblCorreo = new Label();
+            txtCorreo = new TextBox();
             lblCorreoStatus = new Label();
             lblDireccion = new Label();
-            lblProductos = new Label();
-            lblTotal = new Label();
-            txtId = new TextBox();
-            txtEmpresa = new TextBox();
-            txtContacto = new TextBox();
-            txtTelefono = new TextBox();
-            txtCorreo = new TextBox();
             txtDireccion = new TextBox();
+            lblProductos = new Label();
             txtProductos = new TextBox();
-            txtBuscar = new TextBox();
             btnGuardar = new Button();
-            btnEliminar = new Button();
             btnNuevo = new Button();
-            btnExportar = new Button();
+            btnEliminar = new Button();
+            grpLista = new GroupBox();
+            txtBuscar = new TextBox();
             dgvProveedores = new DataGridView();
-
-            // form
-            Text = "Proveedores";
-            Size = new Size(1050, 620);
-            StartPosition = FormStartPosition.CenterParent;
-            Load += frmProveedores_Load;
-
-            // grupo datos
-            grpDatos.Text = "Datos del Proveedor";
-            grpDatos.Location = new Point(10, 10);
-            grpDatos.Size = new Size(350, 560);
-
-            int y = 30;
-            int sep = 55;
-
-            lblId.Text = "ID:"; lblId.Location = new Point(15, y); lblId.Size = new Size(25, 20);
-            y += 20;
-            txtId.Location = new Point(15, y); txtId.Size = new Size(310, 25); txtId.Enabled = false;
-            y += sep;
-
-            lblEmpresa.Text = "Empresa:"; lblEmpresa.Location = new Point(15, y); lblEmpresa.Size = new Size(65, 20);
-            y += 20;
-            txtEmpresa.Location = new Point(15, y); txtEmpresa.Size = new Size(310, 25);
-            y += sep;
-
-            lblContacto.Text = "Contacto:"; lblContacto.Location = new Point(15, y); lblContacto.Size = new Size(65, 20);
-            y += 20;
-            txtContacto.Location = new Point(15, y); txtContacto.Size = new Size(310, 25);
-            y += sep;
-
-            lblTelefono.Text = "Telefono:"; lblTelefono.Location = new Point(15, y); lblTelefono.Size = new Size(65, 20);
-            y += 20;
-            txtTelefono.Location = new Point(15, y); txtTelefono.Size = new Size(310, 25);
-            txtTelefono.TextChanged += txtTelefono_TextChanged;
-            txtTelefono.KeyPress += txtTelefono_KeyPress;
-            y += 28;
-            lblTelStatus.Location = new Point(15, y); lblTelStatus.Size = new Size(310, 18);
-            y += 28;
-
-            lblCorreo.Text = "Correo:"; lblCorreo.Location = new Point(15, y); lblCorreo.Size = new Size(55, 20);
-            y += 20;
-            txtCorreo.Location = new Point(15, y); txtCorreo.Size = new Size(310, 25);
-            txtCorreo.TextChanged += txtCorreo_TextChanged;
-            y += 28;
-            lblCorreoStatus.Location = new Point(15, y); lblCorreoStatus.Size = new Size(310, 18);
-            y += 28;
-
-            lblDireccion.Text = "Direccion:"; lblDireccion.Location = new Point(15, y); lblDireccion.Size = new Size(70, 20);
-            y += 20;
-            txtDireccion.Location = new Point(15, y); txtDireccion.Size = new Size(310, 25);
-            y += sep;
-
-            lblProductos.Text = "Productos que suministra:"; lblProductos.Location = new Point(15, y); lblProductos.Size = new Size(180, 20);
-            y += 20;
-            txtProductos.Location = new Point(15, y); txtProductos.Size = new Size(310, 25);
-            y += 40;
-
-            btnGuardar.Text = "Guardar";
-            btnGuardar.Location = new Point(15, y);
-            btnGuardar.Size = new Size(90, 30);
-            btnGuardar.Click += btnGuardar_Click;
-
-            btnNuevo.Text = "Nuevo";
-            btnNuevo.Location = new Point(115, y);
-            btnNuevo.Size = new Size(90, 30);
-            btnNuevo.Click += btnNuevo_Click;
-
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.Location = new Point(215, y);
-            btnEliminar.Size = new Size(90, 30);
-            btnEliminar.ForeColor = Color.Red;
-            btnEliminar.Click += btnEliminar_Click;
-
-            grpDatos.Controls.Add(lblId); grpDatos.Controls.Add(txtId);
-            grpDatos.Controls.Add(lblEmpresa); grpDatos.Controls.Add(txtEmpresa);
-            grpDatos.Controls.Add(lblContacto); grpDatos.Controls.Add(txtContacto);
-            grpDatos.Controls.Add(lblTelefono); grpDatos.Controls.Add(txtTelefono);
+            lblTotal = new Label();
+            btnExportar = new Button();
+            grpDatos.SuspendLayout();
+            grpLista.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvProveedores).BeginInit();
+            SuspendLayout();
+            // 
+            // grpDatos
+            // 
+            grpDatos.Controls.Add(lblId);
+            grpDatos.Controls.Add(txtId);
+            grpDatos.Controls.Add(lblEmpresa);
+            grpDatos.Controls.Add(txtEmpresa);
+            grpDatos.Controls.Add(lblContacto);
+            grpDatos.Controls.Add(txtContacto);
+            grpDatos.Controls.Add(lblTelefono);
+            grpDatos.Controls.Add(txtTelefono);
             grpDatos.Controls.Add(lblTelStatus);
-            grpDatos.Controls.Add(lblCorreo); grpDatos.Controls.Add(txtCorreo);
+            grpDatos.Controls.Add(lblCorreo);
+            grpDatos.Controls.Add(txtCorreo);
             grpDatos.Controls.Add(lblCorreoStatus);
-            grpDatos.Controls.Add(lblDireccion); grpDatos.Controls.Add(txtDireccion);
-            grpDatos.Controls.Add(lblProductos); grpDatos.Controls.Add(txtProductos);
+            grpDatos.Controls.Add(lblDireccion);
+            grpDatos.Controls.Add(txtDireccion);
+            grpDatos.Controls.Add(lblProductos);
+            grpDatos.Controls.Add(txtProductos);
             grpDatos.Controls.Add(btnGuardar);
             grpDatos.Controls.Add(btnNuevo);
             grpDatos.Controls.Add(btnEliminar);
-
-            // grupo lista
-            grpLista.Text = "Lista de Proveedores";
-            grpLista.Location = new Point(370, 10);
-            grpLista.Size = new Size(655, 560);
-
-            txtBuscar.Location = new Point(15, 25);
-            txtBuscar.Size = new Size(615, 25);
-            txtBuscar.PlaceholderText = "Buscar por empresa o contacto...";
-            txtBuscar.TextChanged += txtBuscar_TextChanged;
-
-            dgvProveedores.Location = new Point(15, 60);
-            dgvProveedores.Size = new Size(620, 430);
-            dgvProveedores.ReadOnly = true;
-            dgvProveedores.AllowUserToAddRows = false;
-            dgvProveedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvProveedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvProveedores.SelectionChanged += dgvProveedores_SelectionChanged;
-
-            lblTotal.Location = new Point(15, 500);
-            lblTotal.Size = new Size(250, 20);
-            lblTotal.Text = "Total: 0 proveedores";
-
-            btnExportar.Text = "Exportar a Excel";
-            btnExportar.Location = new Point(460, 496);
-            btnExportar.Size = new Size(150, 28);
-            btnExportar.Click += btnExportar_Click;
-
+            grpDatos.Location = new Point(10, 10);
+            grpDatos.Name = "grpDatos";
+            grpDatos.Size = new Size(350, 560);
+            grpDatos.TabIndex = 0;
+            grpDatos.TabStop = false;
+            grpDatos.Text = "Datos del Proveedor";
+            // 
+            // lblId
+            // 
+            lblId.Location = new Point(15, 30);
+            lblId.Name = "lblId";
+            lblId.Size = new Size(25, 20);
+            lblId.TabIndex = 0;
+            lblId.Text = "ID:";
+            // 
+            // txtId
+            // 
+            txtId.Enabled = false;
+            txtId.Location = new Point(15, 50);
+            txtId.Name = "txtId";
+            txtId.Size = new Size(310, 27);
+            txtId.TabIndex = 1;
+            // 
+            // lblEmpresa
+            // 
+            lblEmpresa.Location = new Point(15, 85);
+            lblEmpresa.Name = "lblEmpresa";
+            lblEmpresa.Size = new Size(90, 20);
+            lblEmpresa.TabIndex = 2;
+            lblEmpresa.Text = "Empresa:";
+            // 
+            // txtEmpresa
+            // 
+            txtEmpresa.Location = new Point(15, 105);
+            txtEmpresa.Name = "txtEmpresa";
+            txtEmpresa.Size = new Size(310, 27);
+            txtEmpresa.TabIndex = 3;
+            // 
+            // lblContacto
+            // 
+            lblContacto.Location = new Point(15, 140);
+            lblContacto.Name = "lblContacto";
+            lblContacto.Size = new Size(76, 20);
+            lblContacto.TabIndex = 4;
+            lblContacto.Text = "Contacto:";
+            // 
+            // txtContacto
+            // 
+            txtContacto.Location = new Point(15, 160);
+            txtContacto.Name = "txtContacto";
+            txtContacto.Size = new Size(310, 27);
+            txtContacto.TabIndex = 5;
+            // 
+            // lblTelefono
+            // 
+            lblTelefono.Location = new Point(15, 195);
+            lblTelefono.Name = "lblTelefono";
+            lblTelefono.Size = new Size(98, 20);
+            lblTelefono.TabIndex = 6;
+            lblTelefono.Text = "Telefono:";
+            // 
+            // txtTelefono
+            // 
+            txtTelefono.Location = new Point(15, 215);
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(310, 27);
+            txtTelefono.TabIndex = 7;
+            txtTelefono.TextChanged += txtTelefono_TextChanged;
+            txtTelefono.KeyPress += txtTelefono_KeyPress;
+            // 
+            // lblTelStatus
+            // 
+            lblTelStatus.Location = new Point(15, 243);
+            lblTelStatus.Name = "lblTelStatus";
+            lblTelStatus.Size = new Size(310, 18);
+            lblTelStatus.TabIndex = 8;
+            // 
+            // lblCorreo
+            // 
+            lblCorreo.Location = new Point(15, 270);
+            lblCorreo.Name = "lblCorreo";
+            lblCorreo.Size = new Size(76, 20);
+            lblCorreo.TabIndex = 9;
+            lblCorreo.Text = "Correo:";
+            // 
+            // txtCorreo
+            // 
+            txtCorreo.Location = new Point(15, 290);
+            txtCorreo.Name = "txtCorreo";
+            txtCorreo.Size = new Size(310, 27);
+            txtCorreo.TabIndex = 10;
+            txtCorreo.TextChanged += txtCorreo_TextChanged;
+            // 
+            // lblCorreoStatus
+            // 
+            lblCorreoStatus.Location = new Point(15, 318);
+            lblCorreoStatus.Name = "lblCorreoStatus";
+            lblCorreoStatus.Size = new Size(310, 18);
+            lblCorreoStatus.TabIndex = 11;
+            // 
+            // lblDireccion
+            // 
+            lblDireccion.Location = new Point(15, 345);
+            lblDireccion.Name = "lblDireccion";
+            lblDireccion.Size = new Size(134, 20);
+            lblDireccion.TabIndex = 12;
+            lblDireccion.Text = "Direccion:";
+            // 
+            // txtDireccion
+            // 
+            txtDireccion.Location = new Point(15, 365);
+            txtDireccion.Name = "txtDireccion";
+            txtDireccion.Size = new Size(310, 27);
+            txtDireccion.TabIndex = 13;
+            // 
+            // lblProductos
+            // 
+            lblProductos.Location = new Point(15, 400);
+            lblProductos.Name = "lblProductos";
+            lblProductos.Size = new Size(180, 20);
+            lblProductos.TabIndex = 14;
+            lblProductos.Text = "Productos que suministra:";
+            // 
+            // txtProductos
+            // 
+            txtProductos.Location = new Point(15, 420);
+            txtProductos.Name = "txtProductos";
+            txtProductos.Size = new Size(310, 27);
+            txtProductos.TabIndex = 15;
+            // 
+            // btnGuardar
+            // 
+            btnGuardar.Location = new Point(15, 465);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(90, 30);
+            btnGuardar.TabIndex = 16;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.Click += btnGuardar_Click;
+            // 
+            // btnNuevo
+            // 
+            btnNuevo.Location = new Point(115, 465);
+            btnNuevo.Name = "btnNuevo";
+            btnNuevo.Size = new Size(90, 30);
+            btnNuevo.TabIndex = 17;
+            btnNuevo.Text = "Nuevo";
+            btnNuevo.Click += btnNuevo_Click;
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.ForeColor = Color.Red;
+            btnEliminar.Location = new Point(215, 465);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(90, 30);
+            btnEliminar.TabIndex = 18;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.Click += btnEliminar_Click;
+            // 
+            // grpLista
+            // 
             grpLista.Controls.Add(txtBuscar);
             grpLista.Controls.Add(dgvProveedores);
             grpLista.Controls.Add(lblTotal);
             grpLista.Controls.Add(btnExportar);
-
+            grpLista.Location = new Point(370, 10);
+            grpLista.Name = "grpLista";
+            grpLista.Size = new Size(655, 560);
+            grpLista.TabIndex = 1;
+            grpLista.TabStop = false;
+            grpLista.Text = "Lista de Proveedores";
+            // 
+            // txtBuscar
+            // 
+            txtBuscar.Location = new Point(15, 25);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.PlaceholderText = "Buscar por empresa o contacto";
+            txtBuscar.Size = new Size(615, 27);
+            txtBuscar.TabIndex = 0;
+            txtBuscar.TextChanged += txtBuscar_TextChanged;
+            // 
+            // dgvProveedores
+            // 
+            dgvProveedores.AllowUserToAddRows = false;
+            dgvProveedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvProveedores.ColumnHeadersHeight = 29;
+            dgvProveedores.Location = new Point(15, 60);
+            dgvProveedores.Name = "dgvProveedores";
+            dgvProveedores.ReadOnly = true;
+            dgvProveedores.RowHeadersWidth = 51;
+            dgvProveedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvProveedores.Size = new Size(620, 430);
+            dgvProveedores.TabIndex = 1;
+            dgvProveedores.SelectionChanged += dgvProveedores_SelectionChanged;
+            // 
+            // lblTotal
+            // 
+            lblTotal.Location = new Point(15, 500);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(250, 20);
+            lblTotal.TabIndex = 2;
+            lblTotal.Text = "Total: 0 proveedores";
+            // 
+            // btnExportar
+            // 
+            btnExportar.Location = new Point(460, 496);
+            btnExportar.Name = "btnExportar";
+            btnExportar.Size = new Size(150, 28);
+            btnExportar.TabIndex = 3;
+            btnExportar.Text = "Exportar a Excel";
+            btnExportar.Click += btnExportar_Click;
+            // 
+            // frmProveedores
+            // 
+            ClientSize = new Size(1032, 573);
             Controls.Add(grpDatos);
             Controls.Add(grpLista);
+            Name = "frmProveedores";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Proveedores";
+            Load += frmProveedores_Load;
+            grpDatos.ResumeLayout(false);
+            grpDatos.PerformLayout();
+            grpLista.ResumeLayout(false);
+            grpLista.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvProveedores).EndInit();
+            ResumeLayout(false);
         }
     }
 }

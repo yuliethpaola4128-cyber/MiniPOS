@@ -9,6 +9,9 @@
 		<RootNamespace>MiniPOS</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+		
+		<PackageReference Include="HIC.System.Windows.Forms.DataVisualization" Version="1.0.1" />
+		
 		<PackageReference Include="MySql.Data" Version="8.3.0" />
 		<PackageReference Include="ClosedXML" Version="0.102.2" />
 	</ItemGroup>

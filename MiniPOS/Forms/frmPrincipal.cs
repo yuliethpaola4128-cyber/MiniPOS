@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using MiniPOS.Database;
 using MySql.Data.MySqlClient;
 
@@ -19,11 +21,12 @@ namespace MiniPOS.Forms
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
             lblBienvenido.Text = "Bienvenido, " + nombreUsuario;
-            lblFecha.Text = "Fecha: " + DateTime.Now.ToString("dd/MM/yyyy");
+            lblFecha.Text = "Resumen del dia — " + DateTime.Now.ToString("dddd, dd/MM/yyyy");
 
             CargarIndicadores();
             CargarStockBajo();
             CargarProveedores();
+            CargarGrafica();
         }
 
         private void CargarIndicadores()
@@ -70,7 +73,6 @@ namespace MiniPOS.Forms
                 MySqlDataAdapter da = new MySqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-
                 dgvStockBajo.DataSource = dt;
 
                 conn.Close();
@@ -95,7 +97,6 @@ namespace MiniPOS.Forms
                 MySqlDataAdapter da = new MySqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-
                 dgvProveedores.DataSource = dt;
 
                 conn.Close();
@@ -106,29 +107,65 @@ namespace MiniPOS.Forms
             }
         }
 
-      /*  private void mnuProductos_Click(object sender, EventArgs e)
+        // grafica de barras con cantidad de productos por categoria
+        private void CargarGrafica()
+        {
+            try
+            {
+                MySqlConnection conn = ConexionDB.ObtenerConexion();
+
+                string sql = "SELECT c.nombre as Categoria, COUNT(p.id_producto) as Total " +
+                             "FROM categorias c " +
+                             "LEFT JOIN productos p ON c.id_categoria = p.id_categoria " +
+                             "GROUP BY c.id_categoria " +
+                             "ORDER BY c.nombre";
+
+                MySqlDataAdapter da = new MySqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                chartCategorias.Series["Productos"].Points.Clear();
+
+                foreach (DataRow fila in dt.Rows)
+                {
+                    string categoria = fila["Categoria"].ToString();
+                    int total = Convert.ToInt32(fila["Total"]);
+                    chartCategorias.Series["Productos"].Points.AddXY(categoria, total);
+                }
+
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar grafica: " + ex.Message);
+            }
+        }
+
+        private void btnProductos_Click(object sender, EventArgs e)
         {
             frmProductos ventana = new frmProductos();
             ventana.ShowDialog();
             CargarIndicadores();
             CargarStockBajo();
+            CargarGrafica();
         }
 
-        private void mnuCategorias_Click(object sender, EventArgs e)
+        private void btnCategorias_Click(object sender, EventArgs e)
         {
             frmCategorias ventana = new frmCategorias();
             ventana.ShowDialog();
             CargarIndicadores();
+            CargarGrafica();
         }
 
-        private void mnuClientes_Click(object sender, EventArgs e)
+        private void btnClientes_Click(object sender, EventArgs e)
         {
             frmClientes ventana = new frmClientes();
             ventana.ShowDialog();
             CargarIndicadores();
         }
-      */
-        private void mnuProveedores_Click(object sender, EventArgs e)
+
+        private void btnProveedores_Click(object sender, EventArgs e)
         {
             frmProveedores ventana = new frmProveedores();
             ventana.ShowDialog();
@@ -136,15 +173,13 @@ namespace MiniPOS.Forms
             CargarProveedores();
         }
 
-        private void mnuSalir_Click(object sender, EventArgs e)
+        private void btnSalir_Click(object sender, EventArgs e)
         {
             DialogResult respuesta = MessageBox.Show("Desea salir del sistema?",
                 "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (respuesta == DialogResult.Yes)
-            {
                 Application.Exit();
-            }
         }
 
         private void frmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
